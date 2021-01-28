@@ -13,12 +13,14 @@ from .layers.utils import concat_func, add_func
 DEFAULT_GROUP_NAME = "default_group"
 
 
+# 稀疏特征
 class SparseFeat(namedtuple('SparseFeat',
                             ['name', 'vocabulary_size', 'embedding_dim', 'use_hash', 'dtype', 'embeddings_initializer',
                              'embedding_name',
                              'group_name', 'trainable'])):
     __slots__ = ()
 
+    # __new__构造，__init__初始化
     def __new__(cls, name, vocabulary_size, embedding_dim=4, use_hash=False, dtype="int32", embeddings_initializer=None,
                 embedding_name=None,
                 group_name=DEFAULT_GROUP_NAME, trainable=True):
@@ -39,6 +41,7 @@ class SparseFeat(namedtuple('SparseFeat',
         return self.name.__hash__()
 
 
+# 变长稀疏特征
 class VarLenSparseFeat(namedtuple('VarLenSparseFeat',
                                   ['sparsefeat', 'maxlen', 'combiner', 'length_name', 'weight_name', 'weight_norm'])):
     __slots__ = ()
